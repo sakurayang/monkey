@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>猴子排序</title>
+    <script type="text/javascript" src="./monkey.js" defer="defer"></script>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            padding: 0
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .content {
+            padding: 0;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            font-size: 30px;
+        }
+
+        #number {
+            border-width: 0px 0px 2px 0px;
+            border-color: black;
+            font-size: 30px;
+        }
+
+        .black {
+            background-color: black;
+            color: black;
+        }
+
+        .black:hover {
+            color: white;
+        }
+
+        .result {
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body onload="reset(document.getElementById('number'),document.getElementById('output'))">
+    <h1 class="title">猴子排序</h1>
+    <hr />
+    <div style="font-size: 15px;margin-left: 50px">
+        由于Javascript生成的随机数最高为17位<span class='black'>才不是我懒</span>，
+        所以自动生成的数字最高为17位，你可以自己手动输入理论上无数位的数字，但是过长的时候会没有正确排序出现<br />
+        由于猴子排序的不可控性，所以不做自动循环排序，请手动点击“开始排序”按钮，运气好一次即可，运气不好鼠标按坏<br />
+        项目：<span><a href="https://github.com/sakurayang/monkey">Github</a></span>
+    </div>
+    <hr />
+    <div class="content">
+        <div class="top">
+            <div class="input">
+                <label for="number" name="数字串">你的数字:</label>
+                <input id="number" type="number" autofocus width="40px">
+            </div>
+            <label style="font-size: 15px;box-shadow: 0" for="long" name="数字串">n=</label>
+            <input value="6" id="long" type="number" style="width:30px;margin-left:0;">
+            <button type="button"
+                onclick="random(document.getElementById('number'),document.getElementById('long').value,document.getElementById('output'))">生成n位随机数</button>
+            <button type="button"
+                onclick="sort(document.getElementById('number').value,document.getElementById('output'))">开始排序</button>
+            <button type="button"
+                onclick="reset(document.getElementById('number'),document.getElementById('output'))">重置</button>
+        </div>
+        <hr />
+        <div class="down">
+            过程输出:
+            <div id="output"></div>
+        </div>
+    </div>
+</body>
+
+</html>
