@@ -41,10 +41,15 @@
         .result {
             font-size: 15px;
         }
+
+        #result::content {
+            content: none;
+        }
     </style>
 </head>
 
-<body onload="reset(document.getElementById('number'),document.getElementById('output'))">
+<body
+    onload="reset(document.getElementById('number'),document.getElementById('output'),document.getElementById('result'))">
     <h1 class="title">猴子排序</h1>
     <hr />
     <div style="font-size: 15px;margin-left: 50px">
@@ -63,15 +68,16 @@
             <label style="font-size: 15px;box-shadow: 0" for="long" name="数字串">n=</label>
             <input value="6" id="long" type="number" style="width:30px;margin-left:0;">
             <button type="button"
-                onclick="random(document.getElementById('number'),document.getElementById('long').value,document.getElementById('output'))">生成n位随机数</button>
+                onclick="random(document.getElementById('number'),document.getElementById('long').value,document.getElementById('output'),document.getElementById('result'))">生成n位随机数</button>
             <button type="button"
-                onclick="sort(document.getElementById('number').value,document.getElementById('output'))">开始排序</button>
+                onclick="sort(document.getElementById('number').value,document.getElementById('output'),document.getElementById('result'))">开始排序</button>
             <button type="button"
-                onclick="reset(document.getElementById('number'),document.getElementById('output'))">重置</button>
+                onclick="reset(document.getElementById('number'),document.getElementById('output'),document.getElementById('result'))">重置</button>
         </div>
         <hr />
         <div class="down">
             过程输出:
+            <div id="result"></div>
             <div id="output"></div>
         </div>
     </div>

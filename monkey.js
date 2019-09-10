@@ -1,5 +1,5 @@
-function random(input, long, output) {
-    reset(input, output);
+function random(input, long, output, result) {
+    reset(input, output, result);
     let _random = Math.random();
     console.log(_random);
     let random_number = Math.trunc(Math.pow(10, long) * _random);
@@ -7,10 +7,12 @@ function random(input, long, output) {
     input.value = full_number;
 }
 
-function reset(input, output) {
+function reset(input, output, result) {
     input.value = '';
     output.innerHTML = '';
-    localStorage.count = 0
+    result.innerHTML = '';
+    localStorage.count = 0;
+    localStorage.number = "";
     //console.clear()
 }
 
@@ -21,27 +23,33 @@ function getRandomInt(min, max) {
     //不含最大值，含最小值
 }
 
-function sort(number, output) {
-    (localStorage.count == 0) ? insert(`正确顺序：${(String(number).split('')).sort((a,b)=>a-b)}`, output): false;
+function sort(number, output, result) {
+    (localStorage.count == 0) ? result.innerHTML = `正确顺序：${(String(number).split('')).sort((a,b)=>a-b)}`: false;
+    localStorage.number = (localStorage.number) ? localStorage.number : number;
     if (!Number.isInteger(Number(number)) || number == '') return alert("请输入正确的数字");
-    let _number = String(number).split(''); // exp: 9123 =>['9','1','2','3']
+    let _number = (localStorage.number) ? String(localStorage.number).split('') : String(number).split(''); // exp: 9123 =>['9','1','2','3']
     let sort_number = _number; //copy
     sort_number.sort((a, b) => a - b); //['9','1','2','3'] => ['1','2','3','9']
     localStorage.count = localStorage.count ? Number(localStorage.count) + 1 : 1; //init counter
     _monkey = monkey(_number);
     //_monkey.pop();
-    insert(`[${localStorage.count}] ${_monkey}`, output);
-    if (_monkey.toString() == sort_number.toString()) return insert('done', output);
+    if (equar(_monkey, sort_number)) {
+        localStorage.count = 0;
+        localStorage.number = "";
+        return insert(`<span style="background-color:yellow;color:black;font-size:25px;">[${localStorage.count}] ${_monkey}</span>`, output);
+    } else {
+        insert(`[${localStorage.count}] ${_monkey}`, output);
+    }
 }
 
 function monkey(array) {
     if (!array) throw alert('请检查输入');
-    let monkey = array;
+    let monkey = [...array];
     let _monkey = [];
     for (let index = 0, len = array.length; index <= len; index++) {
         if (_monkey[index]) continue;
         let i = getRandomInt(0, monkey.length);
-        console.log(_monkey)
+        //console.log(_monkey)
         _monkey.push(monkey.splice(i, 1)[0]);
     }
     _monkey.pop();
@@ -52,7 +60,7 @@ function insert(text, node) {
     let result = document.createElement('div');
     result.className = 'result';
     result.innerHTML = `[${(new Date()).toTimeString().slice(0,8)}] ${text}`
-    node.appendChild(result);
+    node.insertBefore(result, node.firstChild);
 }
 
 function equar(a, b) {
