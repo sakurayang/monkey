@@ -1,0 +1,9 @@
+{
+  "name": "monkey",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:sakurayang/monkey.git",
+  "author": "sakurayang <1304274443@qq.com>",
+  "license": "MIT",
+  "private": false
+}
